@@ -1155,19 +1155,7 @@ Video=ad:CheckAssetUrl(m)local n=aa:InsertPrefab('VideoPlayer',i)return n end})
 aa:DefineElement('Button',{Base={Text='Button',DoubleClick=false,Callback=f},
 Create=function(h,i)
     local m=aa:InsertPrefab('Button',i)
-    
-    local label = m:FindFirstChild("Label", true)
-    if label and label:IsA("TextLabel") then
-        label.RichText = true
-        
-        function i:SetText(text)
-            self.Text = text
-            label.Text = text
-            label.RichText = true
-            return self
-        end
-    end
-
+    m.RichText=true
     local n,o=aa:MergeMetatables(i,m),i.DoubleClick 
     function i:SetDisabled(p)self.Disabled=p end
     aa:ConnectMouseEvent(m,{DoubleClick=o,Callback=function(...)if i.Disabled then
