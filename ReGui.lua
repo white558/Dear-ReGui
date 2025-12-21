@@ -1159,8 +1159,15 @@ Create=function(h,i)
     local label = m:FindFirstChild("Label", true)
     if label and label:IsA("TextLabel") then
         label.RichText = true
+        
+        function i:SetText(text)
+            self.Text = text
+            label.Text = text
+            label.RichText = true
+            return self
+        end
     end
-    
+
     local n,o=aa:MergeMetatables(i,m),i.DoubleClick 
     function i:SetDisabled(p)self.Disabled=p end
     aa:ConnectMouseEvent(m,{DoubleClick=o,Callback=function(...)if i.Disabled then
