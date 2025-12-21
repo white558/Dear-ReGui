@@ -1153,10 +1153,20 @@ local n=i.Callback return n(m,...)end)return m end})aa:DefineElement(
 'VideoPlayer',{Base={Video='',Callback=f},Create=function(h,i)local m=i.Video i.
 Video=ad:CheckAssetUrl(m)local n=aa:InsertPrefab('VideoPlayer',i)return n end})
 aa:DefineElement('Button',{Base={Text='Button',DoubleClick=false,Callback=f},
-Create=function(h,i)local m=aa:InsertPrefab('Button',i)local n,o=aa:
-MergeMetatables(i,m),i.DoubleClick function i:SetDisabled(p)self.Disabled=p end
-aa:ConnectMouseEvent(m,{DoubleClick=o,Callback=function(...)if i.Disabled then
-return end local p=i.Callback return p(n,...)end})return n,m end})aa:
+Create=function(h,i)
+    local m=aa:InsertPrefab('Button',i)
+    
+    local label = m:FindFirstChild("Label", true)
+    if label and label:IsA("TextLabel") then
+        label.RichText = true
+    end
+    
+    local n,o=aa:MergeMetatables(i,m),i.DoubleClick 
+    function i:SetDisabled(p)self.Disabled=p end
+    aa:ConnectMouseEvent(m,{DoubleClick=o,Callback=function(...)if i.Disabled then
+    return end local p=i.Callback return p(n,...)end})
+    return n,m 
+end})aa:
 DefineElement('Selectable',{Base={Text='Selectable',Callback=f,Selected=false,
 Disabled=false,Size=UDim2.fromScale(1,0),AutomaticSize=Enum.AutomaticSize.Y,
 TextXAlignment=Enum.TextXAlignment.Left,AnimationTags={Selected='Buttons',
